@@ -14,33 +14,37 @@
         android:text="QUANTITY"
         />
 
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="+"
-        android:onClick="addQuantity"
-        />
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="+"
+            android:onClick="addQuantity"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:text="0"
-        android:id="@+id/quantity_text_view"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/black"
+            android:text="0"
+            android:textSize="16sp"
+            android:id="@+id/quantity_text_view"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="-"
-        android:onClick="removeQuantity"
-        />
-
-
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="-"
+            android:onClick="removeQuantity"
+            />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"

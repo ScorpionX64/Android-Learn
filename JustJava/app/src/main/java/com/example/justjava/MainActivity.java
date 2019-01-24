@@ -10,11 +10,14 @@ import java.text.NumberFormat;
 public class MainActivity extends AppCompatActivity {
 
     private int quantity = 0;
+    private  String total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        String priceMessage = "Free";
+        displayMessage(priceMessage);
 
     }
 
@@ -34,8 +37,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitOrder(View view) {
 
+        String priceMessage = "Free";
         display(quantity);
-        displayPrice(quantity * 5);
+        //displayPrice(quantity * 5);
+        if (quantity > 0)
+        {
+            priceMessage = "Total: " + NumberFormat.getCurrencyInstance().format(quantity * 5) + "\n\rThank you!";
+        }
+        displayMessage(priceMessage);
+    }
+
+    public void displayMessage(String priceMessage)
+    {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(priceMessage);
+
     }
 
     /**
