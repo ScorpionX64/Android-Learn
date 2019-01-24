@@ -9,61 +9,66 @@ import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int quantity = 0;
+    private int quantity = 0, price;
     private  String total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String priceMessage = "Free";
-        displayMessage(priceMessage);
+        createOrderSummary();
 
     }
 
     public void addQuantity(View view)
     {
         quantity += 1;
-        display(quantity);
+        displayQuantity(quantity);
 
     }
 
     public void removeQuantity(View view)
     {
         quantity -= 1;
-        display(quantity);
+        displayQuantity(quantity);
 
+    }
+
+    private void calculatePrice(int quantity) {
+        price = quantity * 5;
     }
 
     public void submitOrder(View view) {
 
-        String priceMessage = "Free";
-        display(quantity);
+
+        displayQuantity(quantity);
         //displayPrice(quantity * 5);
-        if (quantity > 0)
-        {
-            priceMessage = "Total: " + NumberFormat.getCurrencyInstance().format(quantity * 5) + "\n\rThank you!";
-        }
-        displayMessage(priceMessage);
+        calculatePrice(quantity);
+        createOrderSummary();
     }
 
-    public void displayMessage(String priceMessage)
+    public void createOrderSummary()
     {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(priceMessage);
+
+        String priceMessage = "Free";
+        if (quantity > 0)
+        {
+            priceMessage = "Name: Jonathan\nQuantity: " + quantity + " \nTotal: " + NumberFormat.getCurrencyInstance().format(price) + "\nThank you!";
+        }
+
+
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summery_text_view);
+        orderSummaryTextView.setText(priceMessage);
 
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int quantity) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText("" + quantity);
     }
 
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
+
 }
