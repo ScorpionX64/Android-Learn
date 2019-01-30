@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import java.text.NumberFormat;
 
@@ -11,12 +13,19 @@ public class MainActivity extends AppCompatActivity {
 
     private int quantity = 0, price;
     private  String total;
+    private CheckBox whippedCream, chocolate;
+    private EditText name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createOrderSummary();
+
+        whippedCream = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        chocolate = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        name = (EditText) findViewById(R.id.name_edittext);
+
 
     }
 
@@ -53,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         String priceMessage = "Free";
         if (quantity > 0)
         {
-            priceMessage = "Name: Jonathan\nQuantity: " + quantity + " \nTotal: " + NumberFormat.getCurrencyInstance().format(price) + "\nThank you!";
+            priceMessage = "Name: " + name.getText() + "\nAdd whipped Cream? " + whippedCream.isChecked() + "\nAdd chocolate? " + chocolate.isChecked() +" \nQuantity: " + quantity + " \nTotal: " + NumberFormat.getCurrencyInstance().format(price) + "\nThank you!";
         }
 
 
