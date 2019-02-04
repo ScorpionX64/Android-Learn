@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!-- web.config for MiX.Integrate.Api in DSINT -->
+<configuration>
+  <configSections>
+    <section name="throttlePolicy" type="WebApiThrottle.ThrottlePolicyConfiguration, WebApiThrottle"/>
+  </configSections>
+  <connectionStrings>
+    <add name="LogDb" connectionString="Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=LogDb;Data Source=DSINTSQL01;Application Name=MiXIntegrate;" providerName="System.Data.SqlClient"/>
+  </connectionStrings>
+  <appSettings>
+    <add key="Fleet.Services.Base.Url" value="http://api.fleet.int.development.domain.local/"/>
+    <add key="MiX.Authentication.Api.Url" value="http://api.authentication.int.development.domain.local/"/>
+    <add key="JourneyManagement.Services.Api" value="http://api.safety.int.development.domain.local"/>
+    <add key="ConfigServicesApiServerUrl" value="http://api.deviceconfig.int.development.domain.local"/>
+    <add key="MiX.GHOS.Services.Api.Url" value="http://api.ghos.int.development.domain.local"/>
+    <add key="MiX.Authorisation.Api.Url" value="http://api.authorisation.int.development.domain.local"/>
+    <add key="MiX.Authorisation.Api.Url" value="http://api.authorisation.int.development.domain.local"/>
+    <add key="MiX.Globalisation.Api.Url" value="http://globalizationapi.mixdevelopment.com/"/>
+    <!-- Redis -->
+    <add key="RedisServerUrl" value="DSINTRED01.int.development.domain.local"/>
+    <add key="RedisDatabaseIndex" value="0"/>
+    <add key="RedisServerPort" value="6379"/>
+    <add key="RedisNonPersistedServerUrl" value="DSINTRED01.int.development.domain.local"/>
+    <add key="RedisNonPersistedDatabaseIndex" value="0"/>
+    <add key="RedisNonPersistedServerPort" value="6379"/>
+    <add key="RedisCompressObjectsLargerThan" value="2048"/>
+    <!-- Throttling -->
+    <add key="ThrottlingPolicyCacheTimeOutMinutes" value="30"/>
+    <!-- AdminWhiteList -->
+    <add key="AdminIpWhiteList" value="127.0.0.1,::1,192.168.0.0-192.168.255.255,172.16.0.0-172.31.255.255,10.0.0.0-10.255.255.255,47.185.231.37,64.135.90.178,91.75.164.146,104.179.105.33,139.130.141.34,149.135.16.176,177.81.178.40,196.33.13.97,196.41.17.66,196.41.17.67,200.161.184.228,203.25.26.176,203.25.26.178,196.250.22.1-196.250.22.2"/>
+    <!-- IdentityServer -->
+    <add key="IdentityServerAuthorityUrl" value="http://identityapi.integration.mixtelematics.com/core/"/>
+    <add key="IdentityServerClientId" value="mix.identity.ro.client"/>
+    <add key="IdentityServerClientSecret" value="MixT3l3m@tics"/>
+    <add key="corsOrigins" value="https://localhost, http://localhost, http://identityapi.integration.mixtelematics.com, http://integrateapi.integration.mixtelematics.com, https://identityapi.integration.mixtelematics.com, https://integrateapi.integration.mixtelematics.com"/>
+    <!--IWebServiceSettings-->
+    <!-- This setting will eventually point to the settings service -->
+    <add key="LocalSettingsDirectory" value="C:\Settings"/>
+    <add key="LogFilePath" value="C:\\WebServices\\MiX.Integrate.Api\\MiX.Integrate.Api.log"/>
+    <add key="LoggingLevels" value="Production,Information,Debug,Test"/>
+    <add key="BaseUri" value="https://integrateapi.integration.mixtelematics.com"/>
+    <add key="MappingApiUrl" value="https://integration.mixtelematics.com/DynaMiX.Mapping.Web.Api/"/>
+  </appSettings>
+  <throttlePolicy limitPerMinute="0" limitPerHour="0" ipThrottling="false" clientThrottling="true" endpointThrottling="false">
+    <rules>
+      <!--Client rules-->
+      <add policyType="2" entry="small" limitPerMinute="20" limitPerHour="500"/>
+      <add policyType="2" entry="medium" limitPerMinute="100" limitPerHour="2500"/>
+      <add policyType="2" entry="large" limitPerMinute="300" limitPerHour="7500"/>
+      <add policyType="2" entry="unlimited" limitPerMinute="1000000" limitPerHour="50000000"/>
+    </rules>
+  </throttlePolicy>
+  <system.web>
+    <compilation debug="true" targetFramework="4.6.2"/>
+    <httpRuntime targetFramework="4.6.2"/>
+  </system.web>
+  <system.webServer>
+    <validation validateIntegratedModeConfiguration="false"/>
+    <handlers>
+      <remove name="ExtensionlessUrlHandler-Integrated-4.0"/>
+      <remove name="OPTIONSVerbHandler"/>
+      <remove name="TRACEVerbHandler"/>
+      <add name="ExtensionlessUrlHandler-Integrated-4.0" path="*." verb="*" type="System.Web.Handlers.TransferRequestHandler" preCondition="integratedMode,runtimeVersionv4.0"/>
+    </handlers>
+    <httpCompression directory="%SystemDrive%\inetpub\temp\IIS Temporary Compressed Files">
+      <dynamicTypes>
+        <add mimeType="application/json" enabled="true"/>
+      </dynamicTypes>
+    </httpCompression>
+  </system.webServer>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Http" publicKeyToken="31bf3856ad364e35" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-11.0.0.0" newVersion="11.0.0.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Net.Http.Formatting" publicKeyToken="31bf3856ad364e35" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin" publicKeyToken="31bf3856ad364e35" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-3.0.1.0" newVersion="3.0.1.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Sigil" publicKeyToken="2d06c3494341c8ab" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-4.6.1.0" newVersion="4.6.1.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="LZ4" publicKeyToken="62e1b5ec1eec9bdd" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-1.0.10.93" newVersion="1.0.10.93"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="MsgPack" publicKeyToken="a2625990d5dc0167" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-0.8.0.0" newVersion="0.8.0.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.IdentityModel.Tokens.Jwt" publicKeyToken="31bf3856ad364e35" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-4.0.20622.1351" newVersion="4.0.20622.1351"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Net.Http" publicKeyToken="b03f5f7f11d50a3a" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-4.2.0.0" newVersion="4.0.0.0"/>
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+</configuration>
