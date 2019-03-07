@@ -19,13 +19,20 @@ public class NumbersActivity extends AppCompatActivity {
 
         ArrayList<Word> numbersWords = new ArrayList<Word>();
         numbersWords.add(new Word("one","lutti"));
-        numbersWords.add(new Word("two","lutti"));
-        numbersWords.add(new Word("three","lutti"));
-        numbersWords.add(new Word("four","lutti"));
+        numbersWords.add(new Word("two","otiiko"));
+        numbersWords.add(new Word("three","tolookosu"));
+        numbersWords.add(new Word("four","oyyisa"));
+        numbersWords.add(new Word("five","massokka"));
+        numbersWords.add(new Word("six","temmokka"));
+        numbersWords.add(new Word("seven","kenekaku"));
+        numbersWords.add(new Word("eight","kawinta"));
+        numbersWords.add(new Word("nine","wo’e"));
+        numbersWords.add(new Word("ten","na’aacha"));
+
 
         WordAdapter itemsAdapter = new WordAdapter(this, R.layout.list_item, numbersWords);
 
-        ListView listView = (ListView) findViewById(R.id.list);
+        ListView listView = (ListView) findViewById(R.id.number_list);
 
         listView.setAdapter(itemsAdapter);
     }
