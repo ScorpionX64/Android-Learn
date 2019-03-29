@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    android:id="@+id/linear_root">
+    <ImageView
+        android:id="@+id/image_veiw"
+        android:visibility="gone"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:src="@mipmap/ic_launcher"/>
+    <LinearLayout
+        android:id="@+id/text_linear_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp">
+    <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/miwok_text_view"/>
+    android:id="@+id/miwok_text_view"
+    android:textStyle="bold"
+    android:textColor="#FFFFFF"
+    android:textSize="18sp"
+        android:layout_weight="8"
+        android:gravity="bottom"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/default_text_view"/>
+        android:id="@+id/default_text_view"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_weight="8"
+        android:gravity="top"
+        />
+    </LinearLayout>
 </LinearLayout>

@@ -16,18 +16,18 @@ public class FamilyActivity extends AppCompatActivity {
 
         ArrayList<Word> wordArrayList = new ArrayList<Word>();
 
-        wordArrayList.add(new Word("father","әpә"));
-        wordArrayList.add(new Word("mother","әṭa"));
-        wordArrayList.add(new Word("son","angsi"));
-        wordArrayList.add(new Word("daughter","tune"));
-        wordArrayList.add(new Word("older brother","taachi"));
-        wordArrayList.add(new Word("younger brother","chalitti"));
-        wordArrayList.add(new Word("older sister","teṭe"));
-        wordArrayList.add(new Word("younger sister","kolliti"));
-        wordArrayList.add(new Word("grandmother","ama"));
-        wordArrayList.add(new Word("grandfather","paapa"));
+        wordArrayList.add(new Word(R.raw.family_father,"father","әpә",R.drawable.family_father));
+        wordArrayList.add(new Word(R.raw.family_mother,"mother","әṭa",R.drawable.family_mother));
+        wordArrayList.add(new Word(R.raw.family_son,"son","angsi",R.drawable.family_son));
+        wordArrayList.add(new Word(R.raw.family_daughter,"daughter","tune",R.drawable.family_daughter));
+        wordArrayList.add(new Word(R.raw.family_older_brother,"older brother","taachi",R.drawable.family_older_brother));
+        wordArrayList.add(new Word(R.raw.family_younger_brother,"younger brother","chalitti",R.drawable.family_younger_brother));
+        wordArrayList.add(new Word(R.raw.family_older_sister,"older sister","teṭe",R.drawable.family_older_sister));
+        wordArrayList.add(new Word(R.raw.family_younger_sister,"younger sister","kolliti",R.drawable.family_younger_sister));
+        wordArrayList.add(new Word(R.raw.family_grandmother,"grandmother","ama",R.drawable.family_grandmother));
+        wordArrayList.add(new Word(R.raw.family_grandfather,"grandfather","paapa",R.drawable.family_grandfather));
 
-        WordAdapter wordAdapter = new WordAdapter(this,R.layout.list_item,wordArrayList);
+        WordAdapter wordAdapter = new WordAdapter(this,R.layout.list_item,wordArrayList,R.color.category_family);
         ListView listView = (ListView) findViewById(R.id.family_list);
         listView.setAdapter(wordAdapter);
     }
